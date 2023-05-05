@@ -34,13 +34,18 @@
   font-size: 1.5rem;
 
   li {
-    border-radius: 25px;
+    border-radius: 15px;
     cursor: pointer;
     padding: 0.5rem 1rem;
 
-    &:hover {
+    &.selected {
+      background-color: hsl(0, 100%, 95%);
+      box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px,
+        rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
+    }
+
+    &:hover:not(.selected) {
       background-color: #f0f1;
-      text-decoration: underline solid lightcoral;
     }
   }
 }

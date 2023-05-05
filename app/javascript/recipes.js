@@ -1,3 +1,4 @@
+var LastSelected = null;
 const recipeList = document.querySelector("#recipe-list");
 const recipeDetails = document.querySelector("#recipe-details");
 
@@ -6,6 +7,12 @@ recipeList.addEventListener("click", async (event) => {
     return;
   }
 
+  if (LastSelected != null) {
+    LastSelected.classList.remove("selected");
+  }
+
+  LastSelected = event.target;
+  event.target.classList.add("selected");
   const recipeName = event.target.textContent.trim();
   const slug = encodeURIComponent(recipeName);
   const response = await fetch("/recipes/" + slug);
