@@ -1,44 +1,18 @@
 <div class="wrapper">
-  <h1>
-    Recipes
-  </h1>
-  <div>
-    <ul class="recipe-list" id="recipe-list">
-      <% @recipes.each do |recipe| %>
-        <li><%= recipe.name %></li>
-      <% end %>
-    </ul>
-    <div class="recipe-details" id="recipe-details">
+  <div class="mid-section">
+    <h1 style="font-size: 3rem; margin:1rem; padding: 0;">
+      Recipes
+    </h1>
+    <div class="row">
+      <ul class="recipe-list" id="recipe-list">
+        <% @recipes.each do |recipe| %>
+          <li><%= recipe.name %></li>
+        <% end %>
+      </ul>
+      <div class="recipe-details" id="recipe-details">
+      </div>
     </div>
   </div>
 </div>
 
-<script>
-
-const recipeList = document.querySelector("#recipe-list");
-const recipeDetails = document.querySelector("#recipe-details");
-
-recipeList.addEventListener("click", async (event) => {
-  if (event.target.tagName !== "LI") { return; }
-
-  const recipeName = event.target.textContent.trim();
-
-  const slug = encodeURIComponent(recipeName);
-  
-  const response = await fetch("/recipes/" + slug);
-  
-  const recipe = await response.json();
-
-  console.log(recipe);
-
-  recipeDetails.innerHTML = `
-  <h2>${recipe.name}</h2>
-  <p>${recipe.description}</p>
-  <ul>
-    ${recipe.foods.map((food) => `
-    <li>${food.name} (${food.amount} ${food.unit})</li>
-    `).join("")}
-  </ul>
-  `;
-});
-</script>
+<%= javascript_include_tag "recipes" %>
