@@ -13,8 +13,12 @@ recipeList.addEventListener("click", async (event) => {
 
   LastSelected = event.target;
   event.target.classList.add("selected");
-  const recipeName = event.target.textContent.trim();
-  const slug = encodeURIComponent(recipeName);
+
+  //const recipeName = event.target.textContent.trim();
+  //const slug = encodeURIComponent(recipeName);
+  
+  const slug = event.target.id;
+
   const response = await fetch("/recipes/" + slug);
   const recipe = await response.json();
 

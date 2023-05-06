@@ -6,7 +6,7 @@
     <div class="row">
       <ul class="recipe-list" id="recipe-list">
         <% @recipes.each do |recipe| %>
-          <li><%= recipe.name %></li>
+          <li id=<%= recipe.id %>><%= recipe.name %></li>
         <% end %>
       </ul>
       <div class="recipe-details" id="recipe-details">
