@@ -5,7 +5,7 @@
     </h1>
     <div class="row">
       <ul class="recipe-list" id="recipe-list">
-        <% @recipes.each do |recipe| %>
+        <% @recipes.sort_by {|element| element.name}.each do |recipe| %>
           <li id=<%= recipe.id %>><%= recipe.name %></li>
         <% end %>
       </ul>
