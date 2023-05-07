@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_05_05_142809) do
+ActiveRecord::Schema[7.0].define(version: 2023_05_07_111651) do
   create_table "foods", force: :cascade do |t|
     t.string "name"
     t.float "amount"
@@ -19,6 +19,24 @@ ActiveRecord::Schema[7.0].define(version: 2023_05_05_142809) do
     t.datetime "updated_at", null: false
     t.integer "recipe_id", null: false
     t.index ["recipe_id"], name: "index_foods_on_recipe_id"
+  end
+
+  create_table "recipe_tag_lists", force: :cascade do |t|
+    t.integer "recipe_id", null: false
+    t.integer "tag_list_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["recipe_id"], name: "index_recipe_tag_lists_on_recipe_id"
+    t.index ["tag_list_id"], name: "index_recipe_tag_lists_on_tag_list_id"
+  end
+
+  create_table "recipe_tags", force: :cascade do |t|
+    t.integer "recipe_id", null: false
+    t.integer "tag_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["recipe_id"], name: "index_recipe_tags_on_recipe_id"
+    t.index ["tag_id"], name: "index_recipe_tags_on_tag_id"
   end
 
   create_table "recipes", force: :cascade do |t|
@@ -31,6 +49,20 @@ ActiveRecord::Schema[7.0].define(version: 2023_05_05_142809) do
     t.index ["slug"], name: "index_recipes_on_slug", unique: true
   end
 
+  create_table "tag_lists", force: :cascade do |t|
+    t.string "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["name"], name: "index_tag_lists_on_name"
+  end
+
+  create_table "tags", force: :cascade do |t|
+    t.string "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["name"], name: "index_tags_on_name"
+  end
+
   create_table "tasks", force: :cascade do |t|
     t.string "title"
     t.text "description"
@@ -39,4 +71,8 @@ ActiveRecord::Schema[7.0].define(version: 2023_05_05_142809) do
   end
 
   add_foreign_key "foods", "recipes"
+  add_foreign_key "recipe_tag_lists", "recipes"
+  add_foreign_key "recipe_tag_lists", "tag_lists"
+  add_foreign_key "recipe_tags", "recipes"
+  add_foreign_key "recipe_tags", "tags"
 end
