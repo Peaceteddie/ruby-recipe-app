@@ -44,9 +44,6 @@ group :development, :test do
 end
 
 group :development do
-  gem "sorbet-runtime"
-  gem "sorbet-rails"
-  
   gem 'erb-formatter'
   gem "web-console"  
   gem 'pry-rails'

@@ -1,4 +1,4 @@
-class RecipeTagsController < ApplicationController
+class RecipesTagsController < ApplicationController
   def create
     recipe = Recipe.find(params[:recipe_id])
     tag = Tag.find_or_create_by(name: params[:tag_name])
