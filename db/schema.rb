@@ -10,69 +10,56 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_05_07_111651) do
+ActiveRecord::Schema[7.0].define(version: 2023_05_08_225626) do
   create_table "foods", force: :cascade do |t|
-    t.string "name"
+    t.string "name", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["name"], name: "index_foods_on_name", unique: true
+  end
+
+  create_table "ingredients", force: :cascade do |t|
+    t.integer "recipe_id", null: false
+    t.integer "food_id", null: false
+    t.integer "unit_id"
     t.float "amount"
-    t.string "unit"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.integer "recipe_id", null: false
-    t.index ["recipe_id"], name: "index_foods_on_recipe_id"
-  end
-
-  create_table "recipe_tag_lists", force: :cascade do |t|
-    t.integer "recipe_id", null: false
-    t.integer "tag_list_id", null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["recipe_id"], name: "index_recipe_tag_lists_on_recipe_id"
-    t.index ["tag_list_id"], name: "index_recipe_tag_lists_on_tag_list_id"
-  end
-
-  create_table "recipe_tags", force: :cascade do |t|
-    t.integer "recipe_id", null: false
-    t.integer "tag_id", null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["recipe_id"], name: "index_recipe_tags_on_recipe_id"
-    t.index ["tag_id"], name: "index_recipe_tags_on_tag_id"
+    t.index ["food_id"], name: "index_ingredients_on_food_id"
+    t.index ["recipe_id"], name: "index_ingredients_on_recipe_id"
+    t.index ["unit_id"], name: "index_ingredients_on_unit_id"
   end
 
   create_table "recipes", force: :cascade do |t|
-    t.string "name"
+    t.string "name", null: false
+    t.text "description"
+    t.json "tags"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.text "description"
-    t.string "slug"
     t.index ["name"], name: "index_recipes_on_name", unique: true
-    t.index ["slug"], name: "index_recipes_on_slug", unique: true
   end
 
-  create_table "tag_lists", force: :cascade do |t|
-    t.string "name"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["name"], name: "index_tag_lists_on_name"
+  create_table "recipes_tags", id: false, force: :cascade do |t|
+    t.integer "recipe_id", null: false
+    t.integer "tag_id", null: false
+    t.index ["recipe_id", "tag_id"], name: "index_recipes_tags_on_recipe_id_and_tag_id"
+    t.index ["tag_id", "recipe_id"], name: "index_recipes_tags_on_tag_id_and_recipe_id"
   end
 
   create_table "tags", force: :cascade do |t|
     t.string "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["name"], name: "index_tags_on_name"
   end
 
-  create_table "tasks", force: :cascade do |t|
-    t.string "title"
-    t.text "description"
+  create_table "units", force: :cascade do |t|
+    t.string "name", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["name"], name: "index_units_on_name", unique: true
   end
 
-  add_foreign_key "foods", "recipes"
-  add_foreign_key "recipe_tag_lists", "recipes"
-  add_foreign_key "recipe_tag_lists", "tag_lists"
-  add_foreign_key "recipe_tags", "recipes"
-  add_foreign_key "recipe_tags", "tags"
+  add_foreign_key "ingredients", "foods"
+  add_foreign_key "ingredients", "recipes"
+  add_foreign_key "ingredients", "units"
 end

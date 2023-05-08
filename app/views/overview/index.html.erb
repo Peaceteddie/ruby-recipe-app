@@ -1,0 +1,88 @@
+<div
+id="wrapper"
+>
+  <div class="column">
+    <h2>Recipes</h2>
+    <ul>
+      <% @recipes.each do |v| %>
+        <li>
+          <% v.attributes.each do |varia| %>
+            <% if varia[0] != 'created_at' && varia[0] != 'updated_at' %>
+              <div class="outer">
+                <div style="width:50%;text-align:right;">
+                  <%= varia[0] %>
+                </div>
+                <div style="width:50%;text-align:left;">
+                  <%= varia[1] %>
+                </div>
+              </div>
+            <% end %>
+          <% end %>
+        </li>
+      <% end %>
+    </ul>
+  </div>
+  <div class="column">
+    <h2>Ingredients</h2>
+    <ul>
+      <% @ingredients.each do |v| %>
+        <li>
+          <% v.attributes.each do |varia| %>
+            <% if varia[0] != 'created_at' && varia[0] != 'updated_at' %>
+              <div class="outer">
+                <div style="width:50%;text-align:right;">
+                  <%= varia[0] %>
+                </div>
+                <div style="width:50%;text-align:left;">
+                  <%= varia[1] %>
+                </div>
+              </div>
+            <% end %>
+          <% end %>
+        </li>
+      <% end %>
+    </ul>
+  </div>
+  <div class="column">
+    <h2>Foods</h2>
+    <ul>
+      <% @foods.each do |v| %>
+        <li>
+          <% v.attributes.each do |varia| %>
+            <% if varia[0] != 'created_at' && varia[0] != 'updated_at' %>
+              <div class="outer">
+                <div style="width:50%;text-align:right;">
+                  <%= varia[0] %>
+                </div>
+                <div style="width:50%;text-align:left;">
+                  <%= varia[1] %>
+                </div>
+              </div>
+            <% end %>
+          <% end %>
+        </li>
+      <% end %>
+    </ul>
+  </div>
+  <div class="column">
+    <h2>Tags</h2>
+    <ul>
+      <% @tags.each do |v| %>
+        <li>
+          <% v.attributes.each do |varia| %>
+            <% if varia[0] != 'created_at' && varia[0] != 'updated_at' %>
+              <div class="outer">
+                <div style="width:50%;text-align:right;">
+                  <%= varia[0] %>
+                </div>
+                <div style="width:50%;text-align:left;">
+                  <%= varia[1] %>
+                </div>
+              </div>
+            <% end %>
+          <% end %>
+        </li>
+      <% end %>
+    </ul>
+  </div>
+</div>

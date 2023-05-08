@@ -1,3 +1,3 @@
 class Tag < ApplicationRecord
-  has_many :recipe_tags, class_name: "RecipeTag"
+    has_and_belongs_to_many :recipes
 end

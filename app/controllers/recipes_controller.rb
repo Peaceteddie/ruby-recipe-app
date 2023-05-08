@@ -1,27 +1,23 @@
 class RecipesController < ApplicationController
   def index
-    @recipes = Recipe.all
-    render layout: "recipes"
-  end
-
-  def create
-    @recipe = Recipe.new(params[:recipe])
-    @recipe.save
-    render json: @recipe.to_json(include: :foods)
+    @recipes = Recipe.includes(:tags)
+    render layout: 'recipes'
   end
 
   def show
-    @recipe = Recipe.includes(:foods).find_by(id: params[:id])
-    render json: @recipe.to_json(include: :foods)
-  end
+    @recipe = Recipe.includes(:tags).find(params[:id])
+    @ingredients = Ingredient.where(recipe_id: @recipe.id).includes(:unit, :food)
+    @ingredients = @ingredients.map do |ingredient|
+      {
+        id: ingredient.id,
+        food: ingredient.food.name,
+        unit: ingredient.unit.nil? ? 'pieces' : ingredient.unit.name,
+        amount: ingredient.amount,
+        created_at: ingredient.created_at,
+        updated_at: ingredient.updated_at
+      }.except(:unit_id, :food_id, :recipe_id)
+    end
 
-  def show_by_slug
-    slug = params[:slug]
-      slug = URI.decode_uri_component(slug)
-      slug = I18n.transliterate(slug)
-      slug = slug.downcase.gsub(" ", "-")
-      @recipe = Recipe.includes(:foods).find_by(slug: slug)
-    
-    render json: @recipe.to_json(include: :foods)
+    render json: { recipe: @recipe, ingredients: @ingredients }
   end
 end

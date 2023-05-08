@@ -1,7 +1,4 @@
 class Recipe < ApplicationRecord
-  has_many :foods
-
-  has_many :tags
-
-  validates :name, presence: true, uniqueness: true
+    has_many :ingredients
+    has_and_belongs_to_many :tags
 end

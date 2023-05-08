@@ -1,0 +1,49 @@
+<div>
+  <h1>Editor</h1>
+  <p>Editor page</p>
+  <ul>
+    <% unless @Recipes.nil? %>
+      <% @Recipes.each do |recipe| %>
+        <li><%= link_to recipe.name, recipe %></li>
+      <% end %>
+    <% end %>
+  </ul>
+  <form>
+    <input id="Name" />
+    <input id="Description" />
+    <table class="table">
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Amount</th>
+          <th>Unit</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+        <%= render partial: 'entry', collection: @entries %>
+        <tr>
+          <td>
+            <input type="text" class="form-control" name="entry[name][]" required>
+          </td>
+          <td>
+            <input type="number" class="form-control" name="entry[amount][]" required>
+          </td>
+          <td>
+            <select class="form-control" name="entry[unit][]" required>
+              <% @units.each do |unit| %>
+                <option value="<%= unit %>"><%= unit.name %></option>
+              <% end %>
+            </select>
+          </td>
+          <td>
+            <button type="button" class="btn btn-primary add-row">Add</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+    <button type="submit" >
+      Submit Recipe
+    </button>
+  </form>
+</div>

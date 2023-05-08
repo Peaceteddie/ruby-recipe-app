@@ -1,21 +1,19 @@
 <div class="wrapper">
   <div class="mid-section">
-  <div>
-    <h1 style="font-size: 3rem; margin:1rem; padding: 0;">
-      Recipes
-    </h1>
-    <input />
-  </div>
+    <div>
+      <h1 style="font-size: 3rem; margin: 1rem; padding: 0">Recipes</h1>
+      <input />
+    </div>
     <div class="row">
       <ul class="recipe-list" id="recipe-list">
-        <% @recipes.sort_by {|element| element.name}.each do |recipe| %>
-          <li id=<%= recipe.id %>><%= recipe.name %></li>
+        <% if not @recipes.nil? %>
+          <%  @recipes.each do |recipe| %>
+            <li id="<%= recipe.id %>" ><%= recipe.name %></li>
+          <% end %>
         <% end %>
       </ul>
-      <div class="recipe-details" id="recipe-details">
-      </div>
+      <div class="recipe-details" id="recipe-details"></div>
     </div>
   </div>
 </div>
-
 <%= javascript_include_tag "recipes" %>
