@@ -26,6 +26,9 @@ recipeList.addEventListener("click", async (event) => {
   const recipe = response_json.recipe;
   const ingredients = response_json.ingredients;
 
+  console.log(recipe);
+  console.log(ingredients);
+
   const isEven = (num) => {
     return num % 2 === 0;
   };
@@ -49,7 +52,9 @@ recipeList.addEventListener("click", async (event) => {
   taglist.style.flexGrow = "1";
 
   taglist.style.listStyle = "none";
+  taglist.style.maxHeight = "30px";
   taglist.style.display = "flex";
+  taglist.style.padding = "0px";
   taglist.style.gap = "10px";
 
   for (let i = 0; i < recipe.tags.length; i++) {
@@ -67,7 +72,7 @@ recipeList.addEventListener("click", async (event) => {
     li.style.flexBasis = "100";
     li.style.flexGrow = "1";
 
-    li.style.minHeight = "30px";
+    li.style.maxHeight = "30px";
     li.style.display = "flex";
 
     li.textContent = tag.name;
@@ -98,7 +103,9 @@ recipeList.addEventListener("click", async (event) => {
     const amountDiv = document.createElement("div");
     amountDiv.setAttribute("id", "amount");
     amountDiv.style.background = isEven(i) ? "#0001" : "#0000";
-    amountDiv.textContent = `${ingredient.amount} ${ingredient.unit}`;
+    amountDiv.textContent = `${ingredient.amount} ${
+      !ingredient.unit ? "" : ingredient.unit
+    }`;
 
     const ingredientDiv = document.createElement("div");
     ingredientDiv.setAttribute("id", "ingredient");

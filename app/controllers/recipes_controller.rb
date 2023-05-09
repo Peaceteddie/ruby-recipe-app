@@ -11,7 +11,7 @@ class RecipesController < ApplicationController
       {
         id: ingredient.id,
         food: ingredient.food.name,
-        unit: ingredient.unit.nil? ? 'pieces' : ingredient.unit.name,
+        unit: ingredient.unit&.name,
         amount: ingredient.amount,
         created_at: ingredient.created_at,
         updated_at: ingredient.updated_at
