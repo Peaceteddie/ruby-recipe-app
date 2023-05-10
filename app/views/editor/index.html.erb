@@ -22,8 +22,8 @@ width:100%;
       Editor
     </h1>
     <div class="row expand" style="justify-content:space-around;">
-      <div class="column" style="min-width:15%">
-        <ul class="column">
+      <div class="col" style="min-width:15%">
+        <ul class="col">
           <% unless @recipes.nil? %>
             <% @recipes.each do |recipe| %>
               <li style="font-size:1.5rem;">
@@ -33,7 +33,7 @@ width:100%;
           <% end %>
         </ul>
       </div>
-      <div class="column" style="min-width:15%">
+      <div class="col" style="min-width:15%">
         <%= form_tag "/recipes", method: :post do %>
           <div style=" display:flex; flex-direction:column; width:100%; ">
             <%= label_tag :name, "Recipe Name" %>
@@ -56,9 +56,9 @@ width:100%;
           <button id="add-entry-button" type="button"> Add Ingredient </button>
         </form>
       </div>
-      <div class="column" style="min-width:15%">
+      <div class="col" style="min-width:15%">
         <h3>Ingredients</h3>
-        <div id="entries-container" class="column expand">
+        <div id="entries-container" class="col expand">
           <%= render partial: "entries", locals: { entries: @entries } %>
         </div>
       </div>

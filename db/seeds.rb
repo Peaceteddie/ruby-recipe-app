@@ -30,7 +30,8 @@ recipe.ingredients.find_or_create_by(food: Food.find_or_create_by(name: 'Flour')
                                      unit: Unit.find_by(name: 'deciliter'))
 recipe.ingredients.find_or_create_by(food: Food.find_or_create_by(name: 'Milk'), amount: 5,
                                      unit: Unit.find_by(name: 'deciliter'))
-recipe.ingredients.find_or_create_by(food: Food.find_or_create_by(name: 'Egg'), amount: 2)
+recipe.ingredients.find_or_create_by(food: Food.find_or_create_by(name: 'Egg'), amount: 2,
+                                     unit: Unit.find_by(name: 'whole'))
 recipe.ingredients.find_or_create_by(food: Food.find_or_create_by(name: 'Butter'), amount: 2,
                                      unit: Unit.find_by(name: 'tablespoon'))
 recipe.ingredients.find_or_create_by(food: Food.find_or_create_by(name: 'Salt'), amount: 1,
@@ -58,15 +59,18 @@ recipe.ingredients.find_or_create_by(food: Food.find_or_create_by(name: 'Bread c
                                      unit: Unit.find_by(name: 'deciliter'))
 recipe.ingredients.find_or_create_by(food: Food.find_or_create_by(name: 'Milk'), amount: 1,
                                      unit: Unit.find_by(name: 'deciliter'))
-recipe.ingredients.find_or_create_by(food: Food.find_or_create_by(name: 'Egg'), amount: 1)
+recipe.ingredients.find_or_create_by(food: Food.find_or_create_by(name: 'Egg'), amount: 1,
+                                     unit: Unit.find_by(name: 'whole'))
 recipe.ingredients.find_or_create_by(food: Food.find_or_create_by(name: 'Salt'), amount: 1,
                                      unit: Unit.find_by(name: 'teaspoon'))
 recipe.ingredients.find_or_create_by(food: Food.find_or_create_by(name: 'Pepper'), amount: 1,
                                      unit: Unit.find_by(name: 'teaspoon'))
-recipe.ingredients.find_or_create_by(food: Food.find_or_create_by(name: 'Onion'), amount: 1)
+recipe.ingredients.find_or_create_by(food: Food.find_or_create_by(name: 'Onion'), amount: 1,
+                                     unit: Unit.find_by(name: 'whole'))
 recipe.ingredients.find_or_create_by(food: Food.find_or_create_by(name: 'Butter'), amount: 2,
                                      unit: Unit.find_by(name: 'tablespoon'))
-recipe.ingredients.find_or_create_by(food: Food.find_or_create_by(name: 'Potato'), amount: 6)
+recipe.ingredients.find_or_create_by(food: Food.find_or_create_by(name: 'Potato'), amount: 6,
+                                     unit: Unit.find_by(name: 'whole'))
 recipe.ingredients.find_or_create_by(food: Food.find_or_create_by(name: 'Lingonberry jam'), amount: 1,
                                      unit: Unit.find_by(name: 'deciliter'))
 

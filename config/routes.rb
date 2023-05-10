@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
   root 'recipes#index'
   get 'recipes' => 'recipes#index'
-  get 'recipes/:id' => 'recipes#show'
+  get 'recipes/:id' => 'recipes#fetch'
 
   get 'overview' => 'overview#index'
 
