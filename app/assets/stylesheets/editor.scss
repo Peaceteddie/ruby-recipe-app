@@ -1,0 +1,14 @@
+.form-control.valid {
+  background: #0f06;
+}
+.form-control.invalid {
+  background: #f006;
+}
+
+form {
+  gap: 0.5rem;
+  display: flex;
+  flex-flow: column wrap;
+  justify-content: space-between;
+  padding-block: 1rem;
+}

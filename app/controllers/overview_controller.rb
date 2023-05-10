@@ -3,6 +3,7 @@ class OverviewController < ApplicationController
     @recipes = Recipe.all
     @ingredients = Ingredient.all
     @foods = Food.all
-    @tags = Tags.all
+    @tags = Tag.all
+    @units = Unit.all
   end
 end

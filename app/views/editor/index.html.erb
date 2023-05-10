@@ -1,49 +1,67 @@
-<div>
-  <h1>Editor</h1>
-  <p>Editor page</p>
-  <ul>
-    <% unless @Recipes.nil? %>
-      <% @Recipes.each do |recipe| %>
-        <li><%= link_to recipe.name, recipe %></li>
-      <% end %>
-    <% end %>
-  </ul>
-  <form>
-    <input id="Name" />
-    <input id="Description" />
-    <table class="table">
-      <thead>
-        <tr>
-          <th>Name</th>
-          <th>Amount</th>
-          <th>Unit</th>
-          <th></th>
-        </tr>
-      </thead>
-      <tbody>
-        <%= render partial: 'entry', collection: @entries %>
-        <tr>
-          <td>
-            <input type="text" class="form-control" name="entry[name][]" required>
-          </td>
-          <td>
-            <input type="number" class="form-control" name="entry[amount][]" required>
-          </td>
-          <td>
-            <select class="form-control" name="entry[unit][]" required>
-              <% @units.each do |unit| %>
-                <option value="<%= unit %>"><%= unit.name %></option>
-              <% end %>
-            </select>
-          </td>
-          <td>
-            <button type="button" class="btn btn-primary add-row">Add</button>
-          </td>
-        </tr>
-      </tbody>
-    </table>
-    <button type="submit" >
-      Submit Recipe
-    </button>
-  </form>
+<div
+  style="
+background:hotpink;
+display:flex;
+flex-direction:column;
+align-items:center;
+height:100%;
+width:100%;
+"
+>
+  <div
+    style="
+  background:lightblue;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  min-height:100%;
+  width:80%;
+  "
+  >
+    <h1 style="border-bottom:2px solid gray;padding-block:2rem;text-align:center;width:90%;">
+      Editor
+    </h1>
+    <div class="row expand" style="justify-content:space-around;">
+      <div class="column" style="min-width:15%">
+        <ul class="column">
+          <% unless @recipes.nil? %>
+            <% @recipes.each do |recipe| %>
+              <li style="font-size:1.5rem;">
+                <%= recipe.name %>
+              </li>
+            <% end %>
+          <% end %>
+        </ul>
+      </div>
+      <div class="column" style="min-width:15%">
+        <%= form_tag "/recipes", method: :post do %>
+          <div style=" display:flex; flex-direction:column; width:100%; ">
+            <%= label_tag :name, "Recipe Name" %>
+            <%= text_field_tag :name, nil, id: "Name" %>
+          </div>
+          <div style=" display:flex; flex-direction:column; width:100%; ">
+            <%= label_tag :description, "Recipe Description" %>
+            <%= text_area_tag :description, nil, id: "Description", rows: 6 %>
+          </div>
+          <%= submit_tag "Submit Recipe", id: "submit-recipe" %>
+        <% end %>
+        <hr style="margin:1px;padding:1px;"/>
+        <form id="ing-form">
+          <%= label_tag :name, "Ingredient" %>
+          <%= text_field_tag :name %>
+          <%= label_tag :amount, "Amount" %>
+          <%= number_field_tag :amount, min: "0", step: "1" %>
+          <%= label_tag :unit, "Unit" %>
+          <%= select_tag :unit, options_for_select(@units.map { |unit| [unit.name, unit.id] }) %>
+          <button id="add-entry-button" type="button"> Add Ingredient </button>
+        </form>
+      </div>
+      <div class="column" style="min-width:15%">
+        <h3>Ingredients</h3>
+        <div id="entries-container" class="column expand">
+          <%= render partial: "entries", locals: { entries: @entries } %>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>

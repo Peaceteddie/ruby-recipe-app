@@ -3,6 +3,17 @@ Tag.destroy_all
 Unit.destroy_all
 Recipe.destroy_all
 
+ActiveRecord::Base.connection.execute("DELETE FROM SQLITE_SEQUENCE WHERE NAME='ingredients'")
+ActiveRecord::Base.connection.execute("DELETE FROM SQLITE_SEQUENCE WHERE NAME='recipes'")
+ActiveRecord::Base.connection.execute("DELETE FROM SQLITE_SEQUENCE WHERE NAME='units'")
+ActiveRecord::Base.connection.execute("DELETE FROM SQLITE_SEQUENCE WHERE NAME='tags'")
+
+Unit.find_or_create_by(name: 'whole')
+Unit.find_or_create_by(name: 'half')
+Unit.find_or_create_by(name: 'quarter')
+
+Unit.find_or_create_by(name: 'clove')
+
 Unit.find_or_create_by(name: 'teaspoon')
 Unit.find_or_create_by(name: 'tablespoon')
 

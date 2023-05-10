@@ -1,0 +1,14 @@
+<% @entries.each do |entry| %>
+  <div class="entry" id="entry-<%= entry[:id] %>">
+    <span class="name"><%= entry[:name] %></span>
+    <span class="amount"><%= entry[:amount] %></span>
+    <span class="unit"><%= entry[:unit] %></span>
+    <button
+      id="delete-entry-button"
+      type="button"
+      data-entry-id="<%= entry[:id] %>"
+    >
+      Delete
+    </button>
+  </div>
+<% end %>
