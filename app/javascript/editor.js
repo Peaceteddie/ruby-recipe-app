@@ -1,4 +1,8 @@
 import { v4 as uuidv4 } from "uuid";
+import "bootstrap";
+
+const myCarouselElement = document.querySelector("#carouselExample");
+const carousel = new bootstrap.Carousel(myCarouselElement);
 
 $(document).on("click", "#add-entry-button", function () {
   const nameInput = $("#name").val();

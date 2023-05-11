@@ -1,66 +1,71 @@
-<div
-  style="
-background:hotpink;
-display:flex;
-flex-direction:column;
-align-items:center;
-height:100%;
-width:100%;
-"
->
-  <div
-    style="
-  background:lightblue;
-  display:flex;
-  flex-direction:column;
-  align-items:center;
-  min-height:100%;
-  width:80%;
-  "
-  >
-    <h1 style="border-bottom:2px solid gray;padding-block:2rem;text-align:center;width:90%;">
+<div class="container h-100">
+  <div class="d-flex p-5 row text-center">
+    <h1>
       Editor
     </h1>
-    <div class="row expand" style="justify-content:space-around;">
-      <div class="col" style="min-width:15%">
-        <ul class="col">
-          <% unless @recipes.nil? %>
-            <% @recipes.each do |recipe| %>
-              <li style="font-size:1.5rem;">
-                <%= recipe.name %>
-              </li>
-            <% end %>
+  </div>
+  <div class="h-50 row">
+    <div class="col">
+      <ul class="col">
+        <% unless @recipes.nil? %>
+          <% @recipes.each do |recipe| %>
+            <li>
+              <%= recipe.name %>
+            </li>
           <% end %>
-        </ul>
-      </div>
-      <div class="col" style="min-width:15%">
-        <%= form_tag "/recipes", method: :post do %>
-          <div style=" display:flex; flex-direction:column; width:100%; ">
-            <%= label_tag :name, "Recipe Name" %>
-            <%= text_field_tag :name, nil, id: "Name" %>
-          </div>
-          <div style=" display:flex; flex-direction:column; width:100%; ">
-            <%= label_tag :description, "Recipe Description" %>
-            <%= text_area_tag :description, nil, id: "Description", rows: 6 %>
-          </div>
-          <%= submit_tag "Submit Recipe", id: "submit-recipe" %>
         <% end %>
-        <hr style="margin:1px;padding:1px;"/>
-        <form id="ing-form">
-          <%= label_tag :name, "Ingredient" %>
-          <%= text_field_tag :name %>
-          <%= label_tag :amount, "Amount" %>
-          <%= number_field_tag :amount, min: "0", step: "1" %>
-          <%= label_tag :unit, "Unit" %>
-          <%= select_tag :unit, options_for_select(@units.map { |unit| [unit.name, unit.id] }) %>
-          <button id="add-entry-button" type="button"> Add Ingredient </button>
-        </form>
-      </div>
-      <div class="col" style="min-width:15%">
-        <h3>Ingredients</h3>
-        <div id="entries-container" class="col expand">
-          <%= render partial: "entries", locals: { entries: @entries } %>
+      </ul>
+    </div>
+    <div class="col">
+      <div id="carouselExample" class="carousel slide h-50">
+        <div class="carousel-inner">
+          <div class="carousel-item active">
+            <%= form_tag "/recipes", method: :post do %>
+              <div class="vstack">
+                <%= label_tag :name, "Recipe Name" %>
+                <%= text_field_tag :name, nil, id: "Name" %>
+              </div>
+              <div class="vstack">
+                <%= label_tag :description, "Recipe Description" %>
+                <%= text_area_tag :description, nil, id: "Description", rows: 6 %>
+              </div>
+              <%= submit_tag "Submit Recipe", id: "submit-recipe" %>
+            <% end %>
+          </div>
+          <div class="carousel-item">
+            <form id="tag-form">
+            </form>
+          </div>
+          <div class="carousel-item">
+            <form id="ing-form">
+              <%= label_tag :name, "Ingredient" %>
+              <%= text_field_tag :name %>
+              <%= label_tag :amount, "Amount" %>
+              <%= number_field_tag :amount, min: "0", step: "1" %>
+              <%= label_tag :unit, "Unit" %>
+              <%= select_tag :unit, options_for_select(@units.map { |unit| [unit.name, unit.id] }) %>
+              <button id="add-entry-button" type="button"> Add Ingredient </button>
+            </form>
+          </div>
         </div>
+        <button class="carousel-control-prev" type="button" data-bs-target="#carouselExample" data-bs-slide="prev">
+          <span class="carousel-control-prev-icon" aria-hidden="true">
+            <i class="bi bi-chevron-compact-left fs-1 text-info" style="position:relative;right:50px;"></i>
+          </span>
+          <span class="visually-hidden">Previous</span>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#carouselExample" data-bs-slide="next">
+          <span class="carousel-control-next-icon" aria-hidden="true">
+            <i class="bi bi-chevron-compact-right fs-1 text-info" style="position:relative;left:50px;"></i>
+          </span>
+          <span class="visually-hidden">Next</span>
+        </button>
+      </div>
+    </div>
+    <div class="col">
+      <h3 class="text-center">Ingredients</h3>
+      <div id="entries-container">
+        <%= render partial: "entries", locals: { entries: @entries } %>
       </div>
     </div>
   </div>

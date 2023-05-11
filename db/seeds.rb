@@ -11,12 +11,22 @@ ActiveRecord::Base.connection.execute("DELETE FROM SQLITE_SEQUENCE WHERE NAME='t
 Unit.find_or_create_by(name: 'whole')
 Unit.find_or_create_by(name: 'half')
 Unit.find_or_create_by(name: 'quarter')
+Unit.find_or_create_by(name: 'eighth')
 
 Unit.find_or_create_by(name: 'clove')
+Unit.find_or_create_by(name: 'bulb')
+Unit.find_or_create_by(name: 'head')
+
+Unit.find_or_create_by(name: 'slice')
+
+Unit.find_or_create_by(name: 'smidgen')
+Unit.find_or_create_by(name: 'pinch')
+Unit.find_or_create_by(name: 'dash')
 
 Unit.find_or_create_by(name: 'teaspoon')
 Unit.find_or_create_by(name: 'tablespoon')
 
+Unit.find_or_create_by(name: 'drop')
 Unit.find_or_create_by(name: 'milliliter')
 Unit.find_or_create_by(name: 'deciliter')
 Unit.find_or_create_by(name: 'liter')

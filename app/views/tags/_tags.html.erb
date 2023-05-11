@@ -1,0 +1,27 @@
+<% tags.each do |tag| %>
+  <% random = rand(0..300) %>
+  <div
+  class="d-flex hstack gap-2 ps-3 pe-2 rounded-pill"
+  style="
+  background:
+    linear-gradient(
+        to bottom right,
+        hsl(<%= random %>, 100%, 40%),
+        hsl(<%= random + 30 %>, 100%, 40%),
+        hsl(<%= random + 60 %>, 100%, 40%));
+  height: 42px;"
+  >
+    <span class="text-white">
+      <%= tag[:name] %>
+    </span>
+    <% if type == "delete" %>
+      <button id="<%= tag[:id]%>"  class="btn">
+        <i class="bi bi-x fs-4"></i>
+      </button>
+    <% else type == "add"%>
+      <button id="<%= tag[:id]%>" class="btn">
+        <i class="bi bi-plus fs-4"></i>
+      </button>
+    <% end %>
+  </div>
+<% end %>

@@ -1,0 +1,46 @@
+<div class="container d-flex h-100 p-5 w-100">
+  <div class="d-flex flex-fill m-0 mh-100 mw-100 row">
+    <div class="d-flex flex-fill h-50 m-0 p-5 row-sm">
+      <div class="col">
+        <div class="d-flex h-100 mh-100 overflow-y-auto vstack w-100">
+          <div id="recipe-name" class="fs-3 justify-content-center m-auto px-5 py-2 rounded-pill text-center text-white"></div>
+          <div id="recipe-tags" class="d-flex flex-wrap gap-3 hstack mw-100 overflow-y-auto py-3"></div>
+        </div>
+      </div>
+      <div class="col">
+        <div class="d-flex h-100 w-100">
+          <i class="bi bi-chevron-double-left m-auto" style="font-size:6rem;"></i>
+        </div>
+      </div>
+      <div class="col">
+        <ul class="vstack">
+          <!--Add selected tags with remove button-->
+        </ul>
+      </div>
+    </div>
+    <div class="d-flex flex-fill gap-5 h-50 m-0 p-5 row-md">
+      <div class="col">
+        <label for="recipe-list" class="h4">Recipes</label>
+        <ul id="recipe-list" class="list-group">
+          <% @recipes.each do |recipe| %>
+            <li id="<%= recipe[:id] %>" class="list-group-item list-group-item-action">
+              <%= recipe[:name] %>
+            </li>
+          <% end %>
+        </ul>
+      </div>
+      <div class="col">
+        <form class="d-flex flex-column form-group">
+          <label for="tag-name" class="h4">Tag Name</label>
+          <input type="text" class="form-control mb-2" id="tag-name" placeholder="Enter tag name">
+          <button type="submit" class="btn btn-primary">Add new tag</button>
+        </form>
+      </div>
+      <div class="col">
+        <ul class="d-flex flex-wrap gap-2">
+          <%= render partial: 'tags', locals: {tags: @tags, type: "add"} %>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>

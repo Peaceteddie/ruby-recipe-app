@@ -1,19 +1,20 @@
 <div class="container d-flex flex-column gap-3 h-100 mh-100 p-5 text-center">
-  <div class="border d-flex justify-content-center p-3 rounded-5 row">
-    <h1 class="h1 p-3">Recipes</h1>
-    <div>
-      <label for="search" class="h4">Search:</label>
-      <input id="search" class="w-25" />
-    </div>
-  </div>
-  <div class="border d-flex flex-fill justify-content-around ps-5 rounded-5 row" style="max-height:80%;">
-    <ul id="recipe-list" class="col-lg-4 my-5 list-group">
-      <% if not @recipes.nil? %>
-        <%  @recipes.each do |recipe| %>
-          <li id="<%= recipe.id %>" class="list-group-item list-group-item-action w-100"><%= recipe.name %></li>
+  <div class="border d-flex flex-fill justify-content-around mh-100 rounded-5 row shadow-sm">
+    <div class="col-lg-4 m-5">
+      <h1 class="h3 m-0 mb-3 p-0">Recipes</h1>
+      <div class="d-flex gap-3">
+        <label for="search" class="h5">Search:</label>
+        <input id="search" class="px-3 rounded-5 w-75" />
+      </div>
+      <hr />
+      <ul id="recipe-list" class="list-group">
+        <% if not @recipes.nil? %>
+          <%  @recipes.each do |recipe| %>
+            <li id="<%= recipe.id %>" class="list-group-item list-group-item-action w-100"><%= recipe.name %></li>
+          <% end %>
         <% end %>
-      <% end %>
-    </ul>
-    <div id="recipe-details" class="border col-lg h-100 overflow-y-auto rounded-5"></div>
+      </ul>
+    </div>
+    <div id="recipe-details" class="border col-lg h-100 overflow-y-auto p-0 rounded-5"></div>
   </div>
 </div>

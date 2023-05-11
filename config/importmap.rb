@@ -10,6 +10,7 @@ pin 'bootstrap', to: 'bootstrap.min.js', preload: true
 pin '@popperjs/core', to: 'popper.js', preload: true
 pin 'recipes', to: 'recipes.js', preload: true
 pin 'editor', to: 'editor.js', preload: true
+pin 'tags', to: 'tags.js', preload: true
 
 pin "jquery", to: "https://ga.jspm.io/npm:jquery@3.6.4/dist/jquery.js", preload: true
 pin 'uuid', to: 'https://ga.jspm.io/npm:uuid@9.0.0/dist/esm-browser/index.js', preload: true
