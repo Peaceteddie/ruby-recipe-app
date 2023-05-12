@@ -16,47 +16,49 @@
         <% end %>
       </ul>
     </div>
-    <div class="col">
-      <div id="carouselExample" class="carousel slide h-50">
-        <div class="carousel-inner">
-          <div class="carousel-item active">
-            <%= form_tag "/recipes", method: :post do %>
-              <div class="vstack">
-                <%= label_tag :name, "Recipe Name" %>
-                <%= text_field_tag :name, nil, id: "Name" %>
-              </div>
-              <div class="vstack">
-                <%= label_tag :description, "Recipe Description" %>
-                <%= text_area_tag :description, nil, id: "Description", rows: 6 %>
-              </div>
-              <%= submit_tag "Submit Recipe", id: "submit-recipe" %>
-            <% end %>
-          </div>
-          <div class="carousel-item">
-            <form id="tag-form">
-            </form>
-          </div>
-          <div class="carousel-item">
-            <form id="ing-form">
-              <%= label_tag :name, "Ingredient" %>
-              <%= text_field_tag :name %>
-              <%= label_tag :amount, "Amount" %>
-              <%= number_field_tag :amount, min: "0", step: "1" %>
-              <%= label_tag :unit, "Unit" %>
-              <%= select_tag :unit, options_for_select(@units.map { |unit| [unit.name, unit.id] }) %>
-              <button id="add-entry-button" type="button"> Add Ingredient </button>
-            </form>
-          </div>
-        </div>
-        <button class="carousel-control-prev" type="button" data-bs-target="#carouselExample" data-bs-slide="prev">
+    <div class="col position-relative">
+      <div class="d-flex px-5">
+        <button class="carousel-control-prev h-75" type="button" data-bs-target="#carouselExample" data-bs-slide="prev">
           <span class="carousel-control-prev-icon" aria-hidden="true">
-            <i class="bi bi-chevron-compact-left fs-1 text-info" style="position:relative;right:50px;"></i>
+            <i class="bi bi-chevron-compact-left fs-1 text-info"></i>
           </span>
           <span class="visually-hidden">Previous</span>
         </button>
-        <button class="carousel-control-next" type="button" data-bs-target="#carouselExample" data-bs-slide="next">
+        <div id="carouselExample" class="carousel d-flex flex-fill h-100 position-relative slide">
+          <div class="carousel-inner">
+            <div class="carousel-item active">
+              <%= form_tag "/recipes", method: :post do %>
+                <div class="vstack">
+                  <%= label_tag :name, "Recipe Name" %>
+                  <%= text_field_tag :name, nil, id: "Name" %>
+                </div>
+                <div class="vstack">
+                  <%= label_tag :description, "Recipe Description" %>
+                  <%= text_area_tag :description, nil, id: "Description", rows: 6 %>
+                </div>
+                <%= submit_tag "Submit Recipe", id: "submit-recipe" %>
+              <% end %>
+            </div>
+            <div class="carousel-item">
+              <form id="tag-form">
+              </form>
+            </div>
+            <div class="carousel-item">
+              <form id="ing-form">
+                <%= label_tag :name, "Ingredient" %>
+                <%= text_field_tag :name %>
+                <%= label_tag :amount, "Amount" %>
+                <%= number_field_tag :amount, min: "0", step: "1" %>
+                <%= label_tag :unit, "Unit" %>
+                <%= select_tag :unit, options_for_select(@units.map { |unit| [unit.name, unit.id] }) %>
+                <button id="add-entry-button" type="button"> Add Ingredient </button>
+              </form>
+            </div>
+          </div>
+        </div>
+        <button class="carousel-control-next h-75" type="button" data-bs-target="#carouselExample" data-bs-slide="next">
           <span class="carousel-control-next-icon" aria-hidden="true">
-            <i class="bi bi-chevron-compact-right fs-1 text-info" style="position:relative;left:50px;"></i>
+            <i class="bi bi-chevron-compact-right fs-1 text-info"></i>
           </span>
           <span class="visually-hidden">Next</span>
         </button>

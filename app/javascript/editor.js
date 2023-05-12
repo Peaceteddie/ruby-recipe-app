@@ -2,7 +2,7 @@ import { v4 as uuidv4 } from "uuid";
 import "bootstrap";
 
 const myCarouselElement = document.querySelector("#carouselExample");
-const carousel = new bootstrap.Carousel(myCarouselElement);
+new bootstrap.Carousel(myCarouselElement);
 
 $(document).on("click", "#add-entry-button", function () {
   const nameInput = $("#name").val();
@@ -21,7 +21,6 @@ $(document).on("click", "#add-entry-button", function () {
       authenticity_token: $('meta[name="csrf-token"]').attr("content"),
     },
     success: function (data) {
-      console.log(data);
       $("#entries-container").html(data);
     },
   });

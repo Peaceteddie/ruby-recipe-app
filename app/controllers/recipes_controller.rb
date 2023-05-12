@@ -3,10 +3,12 @@ class RecipesController < ApplicationController
     @recipes = Recipe.includes(:tags)
     render layout: 'recipes'
   end
+
   def fetch
     @selected = Recipe.includes(:tags, ingredients: :unit).find(params[:id])
     render partial: 'details', locals: { recipe: @selected }
   end
+
   def show
     @recipe = Recipe.includes(:tags).find(params[:id])
     @ingredients = Ingredient.where(recipe_id: @recipe.id).includes(:unit, :food)
@@ -14,7 +16,7 @@ class RecipesController < ApplicationController
       {
         id: ingredient.id,
         food: ingredient.food.name,
-        unit: ingredient.unit&.name,
+        unit: ingredient.unit.name,
         amount: ingredient.amount,
         created_at: ingredient.created_at,
         updated_at: ingredient.updated_at

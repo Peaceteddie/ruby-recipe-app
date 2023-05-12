@@ -27,12 +27,13 @@ ActiveRecord::Schema[7.0].define(version: 2023_05_12_105756) do
 
   create_table "ingredients", force: :cascade do |t|
     t.integer "recipe_id", null: false
-    t.integer "food_id", null: false
-    t.integer "unit_id", null: false
+    t.integer "unit_id"
     t.float "amount"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["food_id"], name: "index_ingredients_on_food_id"
+    t.string "food_type", default: "None", null: false
+    t.integer "food_id"
+    t.index ["food_type", "food_id"], name: "index_ingredients_on_food"
     t.index ["recipe_id"], name: "index_ingredients_on_recipe_id"
     t.index ["unit_id"], name: "index_ingredients_on_unit_id"
   end
@@ -40,6 +41,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_05_12_105756) do
   create_table "recipes", force: :cascade do |t|
     t.string "name", null: false
     t.text "description"
+    t.json "tags"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["name"], name: "index_recipes_on_name", unique: true
@@ -48,15 +50,14 @@ ActiveRecord::Schema[7.0].define(version: 2023_05_12_105756) do
   create_table "recipes_tags", id: false, force: :cascade do |t|
     t.integer "recipe_id", null: false
     t.integer "tag_id", null: false
-    t.index ["recipe_id", "tag_id"], name: "index_recipes_tags_on_recipe_id_and_tag_id", unique: true
-    t.index ["tag_id", "recipe_id"], name: "index_recipes_tags_on_tag_id_and_recipe_id", unique: true
+    t.index ["recipe_id", "tag_id"], name: "index_recipes_tags_on_recipe_id_and_tag_id"
+    t.index ["tag_id", "recipe_id"], name: "index_recipes_tags_on_tag_id_and_recipe_id"
   end
 
   create_table "tags", force: :cascade do |t|
-    t.string "name", null: false
+    t.string "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["name"], name: "index_tags_on_name", unique: true
   end
 
   create_table "units", force: :cascade do |t|
@@ -66,7 +67,6 @@ ActiveRecord::Schema[7.0].define(version: 2023_05_12_105756) do
     t.index ["name"], name: "index_units_on_name", unique: true
   end
 
-  add_foreign_key "ingredients", "foods"
   add_foreign_key "ingredients", "recipes"
   add_foreign_key "ingredients", "units"
 end
