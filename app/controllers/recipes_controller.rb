@@ -1,6 +1,7 @@
 class RecipesController < ApplicationController
   def index
-    @recipes = Recipe.includes(:tags)
+    @recipe = Recipe.includes(:tags, ingredients: :unit).find(params[:id]) if params[:id]
+    @recipes = Recipe.includes(:tags).all
     render layout: 'recipes'
   end
 

@@ -1,74 +1,41 @@
-<div class="container h-100">
-  <div class="d-flex p-5 row text-center">
-    <h1>
-      Editor
-    </h1>
+<div class="container d-flex flex-column justify-content-center h-100 p-5 rounded-pill row-gap-5">
+  <div class="border-bottom d-flex h1">
+    <input id="recipe-name" placeholder="Recipe name" class="border-0 px-3 rounded-pill text-center w-100" />
   </div>
-  <div class="h-50 row">
-    <div class="col">
-      <ul class="col">
-        <% unless @recipes.nil? %>
-          <% @recipes.each do |recipe| %>
-            <li>
-              <%= recipe.name %>
-            </li>
-          <% end %>
-        <% end %>
-      </ul>
+  <div class="border-bottom d-flex h2">
+    <input id="recipe-description" placeholder="Recipe description" class="border-0 px-3 rounded-pill text-center w-100" />
+  </div>
+  <div class="border-bottom d-flex gap-5 justify-content-center">
+    <div class="col" ></div>
+    <span class="align-items-center col d-flex h3 justify-content-center m-0 p-0">
+      Tags:
+    </span>
+    <div class="col d-flex justify-content-end">
+      <input id="tag-name" class="px-3 py-1 rounded-pill" placeholder="Tag name" type="text" />
+      <button id="add-tag" class="btn d-flex ">
+        <i class="bi bi-plus-circle d-flex fs-3"></i>
+      </button>
     </div>
-    <div class="col position-relative">
-      <div class="d-flex px-5">
-        <button class="carousel-control-prev h-75" type="button" data-bs-target="#carouselExample" data-bs-slide="prev">
-          <span class="carousel-control-prev-icon" aria-hidden="true">
-            <i class="bi bi-chevron-compact-left fs-1 text-info"></i>
-          </span>
-          <span class="visually-hidden">Previous</span>
-        </button>
-        <div id="carouselExample" class="carousel d-flex flex-fill h-100 position-relative slide">
-          <div class="carousel-inner">
-            <div class="carousel-item active">
-              <%= form_tag "/recipes", method: :post do %>
-                <div class="vstack">
-                  <%= label_tag :name, "Recipe Name" %>
-                  <%= text_field_tag :name, nil, id: "Name" %>
-                </div>
-                <div class="vstack">
-                  <%= label_tag :description, "Recipe Description" %>
-                  <%= text_area_tag :description, nil, id: "Description", rows: 6 %>
-                </div>
-                <%= submit_tag "Submit Recipe", id: "submit-recipe" %>
-              <% end %>
-            </div>
-            <div class="carousel-item">
-              <form id="tag-form">
-              </form>
-            </div>
-            <div class="carousel-item">
-              <form id="ing-form">
-                <%= label_tag :name, "Ingredient" %>
-                <%= text_field_tag :name %>
-                <%= label_tag :amount, "Amount" %>
-                <%= number_field_tag :amount, min: "0", step: "1" %>
-                <%= label_tag :unit, "Unit" %>
-                <%= select_tag :unit, options_for_select(@units.map { |unit| [unit.name, unit.id] }) %>
-                <button id="add-entry-button" type="button"> Add Ingredient </button>
-              </form>
-            </div>
-          </div>
-        </div>
-        <button class="carousel-control-next h-75" type="button" data-bs-target="#carouselExample" data-bs-slide="next">
-          <span class="carousel-control-next-icon" aria-hidden="true">
-            <i class="bi bi-chevron-compact-right fs-1 text-info"></i>
-          </span>
-          <span class="visually-hidden">Next</span>
-        </button>
-      </div>
-    </div>
-    <div class="col">
-      <h3 class="text-center">Ingredients</h3>
-      <div id="entries-container">
-        <%= render partial: "entries", locals: { entries: @entries } %>
-      </div>
+  </div>
+  <div id="tags-container" class="align-items-center border-bottom d-flex hstack justify-content-center">
+  </div>
+  <div class="border-bottom d-flex h3 justify-content-center">
+    Ingredients:
+  </div>
+  <div id="ingredients-container" class="align-items-center border-bottom d-flex flex-column">
+  </div>
+  <div class="border d-flex gap-5 hstack m-0 my-2 px-4 rounded-pill">
+    <input id="amount" class="border-0 d-flex h-100 px-3 rounded-pill" type="number" value="1">
+    <select id="unit" class="border-0 d-flex h-100 px-3 rounded-pill">
+      <% @units.each do |unit|%>
+        <option value="<%= unit.id %>"><%= unit.name %></option>
+      <%end%>
+    </select>
+    <div class="col-sm d-flex flex-nowrap text-start">
+      <input id="name" class="border-0 d-flex flex-fill px-3 rounded-pill" placeholder="Ingredient name" type="text">
+      <button id="add-entry-button" class="btn" type="button">
+        <i class="bi bi-plus-circle fs-3"></i>
+      </button>
     </div>
   </div>
 </div>

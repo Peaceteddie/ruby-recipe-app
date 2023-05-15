@@ -8,7 +8,7 @@ class TagsController < ApplicationController
 
   def get_recipe_tags
     tags = Recipe.find(params[:recipe_id]).tags
-    render partial: 'tags', locals: { tags:, type: 'delete' }
+    render partial: 'tags', locals: { tags: }
   end
 
   def add_tag_to_entries

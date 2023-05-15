@@ -15,6 +15,8 @@
         <% end %>
       </ul>
     </div>
-    <div id="recipe-details" class="border col-lg h-100 overflow-y-auto p-0 rounded-5"></div>
+    <div id="recipe-details" class="border col-lg h-100 overflow-y-auto p-0 rounded-5">
+      <%= render(partial: 'details', locals: { recipe: @recipe }) if @recipe.present? %>
+    </div>
   </div>
 </div>
