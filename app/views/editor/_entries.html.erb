@@ -1,22 +1,22 @@
 <% @entries.each do |entry| %>
-  <div class="entry" id="entry-<%= entry[:id] %>">
-    <div class="border m-0 my-2 row">
-      <div class="border col-sm-6 col-md-4">
+  <div class="d-flex entry justify-content-center h-100 py-1 w-100" id="entry-<%= entry[:id] %>">
+    <div class="align-items-center border d-flex hstack p-0 rounded-pill w-50">
+      <div class="col-sm-6 col-md-4">
         <div class="row">
-          <div class="border col-4 text-end">
+          <div id="ingredient-amount" class="col-4 text-end">
             <%= entry[:amount] %>
           </div>
-          <div class="border col-8 flex-grow-1 flex-shrink-1 text-start">
+          <div id="ingredient-unit" class="col-8 flex-fill text-start">
             <%= entry[:unit] %>
           </div>
         </div>
       </div>
-      <div class="border col-sm text-start">
+      <div id="ingredient-name" class="col-sm text-start">
         <%= entry[:name] %>
       </div>
-      <div class="border col-sm-2">
-        <button id="delete-entry-button" type="button" data-entry-id="<%= entry[:id] %>">
-          Delete
+      <div class="col-sm-2">
+        <button id="delete-entry-button" class="btn m-0 p-0 text-danger" data-entry-id="<%= entry[:id] %>" type="button">
+          <i class="bi bi-x-circle fs-4 m-0 p-0"></i>
         </button>
       </div>
     </div>

@@ -10,32 +10,39 @@
     <span class="align-items-center col d-flex h3 justify-content-center m-0 p-0">
       Tags:
     </span>
-    <div class="col d-flex justify-content-end">
+    <div class="col d-flex justify-content-end pb-2">
       <input id="tag-name" class="px-3 py-1 rounded-pill" placeholder="Tag name" type="text" />
       <button id="add-tag" class="btn d-flex ">
         <i class="bi bi-plus-circle d-flex fs-3"></i>
       </button>
     </div>
   </div>
-  <div id="tags-container" class="align-items-center border-bottom d-flex hstack justify-content-center">
+  <div id="tags-container" class="align-items-center border-bottom d-flex gap-1 hstack justify-content-center pb-2">
   </div>
   <div class="border-bottom d-flex h3 justify-content-center">
     Ingredients:
   </div>
-  <div id="ingredients-container" class="align-items-center border-bottom d-flex flex-column">
+  <div id="ingredients-container" class="align-items-center border-bottom d-flex flex-column py-2">
   </div>
-  <div class="border d-flex gap-5 hstack m-0 my-2 px-4 rounded-pill">
-    <input id="amount" class="border-0 d-flex h-100 px-3 rounded-pill" type="number" value="1">
-    <select id="unit" class="border-0 d-flex h-100 px-3 rounded-pill">
-      <% @units.each do |unit|%>
-        <option value="<%= unit.id %>"><%= unit.name %></option>
-      <%end%>
-    </select>
-    <div class="col-sm d-flex flex-nowrap text-start">
-      <input id="name" class="border-0 d-flex flex-fill px-3 rounded-pill" placeholder="Ingredient name" type="text">
-      <button id="add-entry-button" class="btn" type="button">
-        <i class="bi bi-plus-circle fs-3"></i>
-      </button>
+  <div class="align-self-center border d-flex px-5 rounded-pill w-75">
+    <div class="d-flex flex-fill flex-wrap gap-0 gap-xl-5">
+      <div class="d-flex flex-shrink-1 flex-wrap py-2 py-lg-0">
+        <input class="border-0 d-flex flex-shrink-1 px-3 rounded-pill" id="amount" type="number" value="1">
+        <select class="border-0 d-flex flex-shrink-1 px-3 rounded-pill" id="unit">
+          <% @units.each do |unit|%>
+            <option value="<%= unit.id %>"><%= unit.name %></option>
+          <%end%>
+        </select>
+      </div>
+      <div class="col-md d-flex flex-fill py-2 py-lg-0">
+        <input id="name" class="border-0 d-flex flex-fill px-3 rounded-pill text-start" placeholder="Ingredient name" type="text">
+      </div>
     </div>
+    <button id="add-entry-button" class="align-items-center btn d-flex flex-shrink-1 justify-content-end p-0" type="button">
+      <i class="bi bi-plus-circle fs-3"></i>
+    </button>
   </div>
+  <button id="submit-recipe" class="align-self-center btn btn-primary d-flex justify-content-center shadow w-25">
+  Submit Recipe
+  </button>
 </div>

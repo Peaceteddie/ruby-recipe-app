@@ -1,8 +1,8 @@
 <% tags.each do |tag| %>
   <% type ||= 'delete' %>
-  <% random = rand(5..31) * 10 %>
+  <% random = rand(8..28) * 10 %>
   <div
-  class="d-flex hstack gap-2 ps-3 pe-2 rounded-pill"
+  class="d-flex hstack gap-2 px-3 rounded-pill"
   style="
   background:
     linear-gradient(
@@ -12,24 +12,16 @@
         hsl(<%= random + 50 %>, 100%, 40%));
   height: 42px;"
   >
-    <span class="text-white">
+    <span id="tag-name" class="text-center text-white">
       <%= tag[:name] %>
     </span>
     <% if type == "delete" %>
-      <button id="<%= tag[:id]%>"  class="btn" onclick="
-      $.ajax({
-        url: 'editor/remove_tag',
-        type: 'DELETE',
-        data: {id: '<%= tag[:id]%>'},
-        success: function(data) {
-          $('#tags-container').html(data);
-        }})
-      ">
-        <i class="bi bi-x fs-4"></i>
+      <button id="remove-tag" data-tagID="<%= tag[:id]%>"  class="btn m-0 p-0 text-danger">
+        <i class="bi bi-x fs-4 m-0 p-0"></i>
       </button>
     <% else type == "add"%>
-      <button id="<%= tag[:id]%>" class="btn">
-        <i class="bi bi-plus fs-4"></i>
+      <button id="<%= tag[:id]%>" class="btn m-0 p-0">
+        <i class="bi bi-plus fs-4 m-0 p-0"></i>
       </button>
     <% end %>
   </div>

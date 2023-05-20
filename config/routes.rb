@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  # scope "/recipe-app" do
   ### RECIPES ############################################
   root 'recipes#index'
   get 'recipes' => 'recipes#index'
@@ -15,6 +16,7 @@ Rails.application.routes.draw do
   delete 'editor/remove_tag' => 'editor#remove_tag'
   post 'editor/create_entry' => 'editor#create_entry'
   delete 'editor/delete_entry' => 'editor#delete_entry'
+  post 'editor/submit_recipe' => 'editor#submit_recipe'
   ########################################################
 
   ### TAGS ###############################################
@@ -27,4 +29,5 @@ Rails.application.routes.draw do
   ### CATCH ALL ##########################################
   get ':id' => 'recipes#index'
   ########################################################
+  # end
 end

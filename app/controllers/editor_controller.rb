@@ -62,9 +62,37 @@ class EditorController < ApplicationController
   def submit_recipe
     name = params[:recipe_name]
     description = params[:recipe_description]
-    ingredients = params[:recipe_ingredients]
 
-    return head(:bad_request) if name.blank? or ingredients.blank? or Recipes.find_by(name:).present?
+    tags = session[:tags] ||= []
+    ingredients = session[:entries] ||= []
+
+    no_name = name.blank?
+    no_tags = tags.blank?
+    no_description = description.blank?
+    no_ingredients = ingredients.blank?
+
+    recipe_exists = Recipe.where('lower(name) = ?', name.downcase).exists?
+
+    return head(:bad_request) if no_name || no_tags || no_description || no_ingredients || recipe_exists
+
+    recipe = Recipe.create(name:, description:)
+
+    ingredients.each do |ingredient|
+      ingredient = ingredient.symbolize_keys
+      food = Food.find_or_create_by(name: ingredient[:name])
+      amount = ingredient[:amount].to_i
+      unit = Unit.find_by(name: ingredient[:unit])
+
+      recipe.ingredients << Ingredient.create(recipe:, food:, unit:, amount:)
+    end
+
+    tags.each do |tag|
+      tag = tag.symbolize_keys
+      recipe.tags << Tag.find_or_create_by(name: tag[:name])
+    end
+
+    #include recipe[:id] in the response
+    render json: { id: recipe.id }
   end
 
   private

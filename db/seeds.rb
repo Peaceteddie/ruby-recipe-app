@@ -8,84 +8,100 @@ ActiveRecord::Base.connection.execute("DELETE FROM SQLITE_SEQUENCE WHERE NAME='r
 ActiveRecord::Base.connection.execute("DELETE FROM SQLITE_SEQUENCE WHERE NAME='units'")
 ActiveRecord::Base.connection.execute("DELETE FROM SQLITE_SEQUENCE WHERE NAME='tags'")
 
-Unit.find_or_create_by(name: 'whole')
-Unit.find_or_create_by(name: 'half')
-Unit.find_or_create_by(name: 'quarter')
-Unit.find_or_create_by(name: 'eighth')
+units = %w[
+  whole
+  half
+  quarter
+  eighth
+  clove
+  bulb
+  head
+  slice
+  smidgen
+  pinch
+  dash
+  teaspoon
+  tablespoon
+  drop
+  milliliter
+  deciliter
+  liter
+  milligram
+  gram
+  kilogram
+]
 
-Unit.find_or_create_by(name: 'clove')
-Unit.find_or_create_by(name: 'bulb')
-Unit.find_or_create_by(name: 'head')
+units.each do |name|
+  Unit.create(name:)
+end
 
-Unit.find_or_create_by(name: 'slice')
+### Pancakes ###
+recipe = Recipe.create(name: 'Pancakes', description: 'A delicious breakfast treat')
 
-Unit.find_or_create_by(name: 'smidgen')
-Unit.find_or_create_by(name: 'pinch')
-Unit.find_or_create_by(name: 'dash')
+ingredients = [
+  { name: 'Flour', amount: 3, unit: 'deciliter' },
+  { name: 'Milk', amount: 5, unit: 'deciliter' },
+  { name: 'Egg', amount: 2, unit: 'whole' },
+  { name: 'Butter', amount: 2, unit: 'tablespoon' },
+  { name: 'Salt', amount: 1, unit: 'teaspoon' },
+  { name: 'Sugar', amount: 1, unit: 'tablespoon' },
+  { name: 'Baking powder', amount: 2, unit: 'teaspoon' },
+  { name: 'Vanilla sugar', amount: 1, unit: 'teaspoon' },
+  { name: 'Oil', amount: 1, unit: 'tablespoon' }
+]
 
-Unit.find_or_create_by(name: 'teaspoon')
-Unit.find_or_create_by(name: 'tablespoon')
+ingredients.each do |ingredient|
+  food = Food.find_or_create_by(name: ingredient[:name])
+  amount = ingredient[:amount].to_i
+  unit = Unit.find_by(name: ingredient[:unit])
+  recipe.ingredients << Ingredient.create(food:, amount:, unit:)
+end
 
-Unit.find_or_create_by(name: 'drop')
-Unit.find_or_create_by(name: 'milliliter')
-Unit.find_or_create_by(name: 'deciliter')
-Unit.find_or_create_by(name: 'liter')
+tags = %w[
+  Breakfast
+  Dessert
+  Vegetarian
+  Sweet
+  Easy
+  Quick
+]
 
-Unit.find_or_create_by(name: 'milligram')
-Unit.find_or_create_by(name: 'gram')
-Unit.find_or_create_by(name: 'kilogram')
+tags.each do |tag|
+  recipe.tags << Tag.find_or_create_by(name: tag)
+end
 
-recipe = Recipe.find_or_create_by(name: 'Pancakes', description: 'A delicious breakfast treat')
-recipe.ingredients.find_or_create_by(food: Food.find_or_create_by(name: 'Flour'), amount: 2,
-                                     unit: Unit.find_by(name: 'deciliter'))
-recipe.ingredients.find_or_create_by(food: Food.find_or_create_by(name: 'Milk'), amount: 5,
-                                     unit: Unit.find_by(name: 'deciliter'))
-recipe.ingredients.find_or_create_by(food: Food.find_or_create_by(name: 'Egg'), amount: 2,
-                                     unit: Unit.find_by(name: 'whole'))
-recipe.ingredients.find_or_create_by(food: Food.find_or_create_by(name: 'Butter'), amount: 2,
-                                     unit: Unit.find_by(name: 'tablespoon'))
-recipe.ingredients.find_or_create_by(food: Food.find_or_create_by(name: 'Salt'), amount: 1,
-                                     unit: Unit.find_by(name: 'teaspoon'))
-recipe.ingredients.find_or_create_by(food: Food.find_or_create_by(name: 'Sugar'), amount: 1,
-                                     unit: Unit.find_by(name: 'tablespoon'))
-recipe.ingredients.find_or_create_by(food: Food.find_or_create_by(name: 'Baking powder'), amount: 2,
-                                     unit: Unit.find_by(name: 'teaspoon'))
-recipe.ingredients.find_or_create_by(food: Food.find_or_create_by(name: 'Vanilla sugar'), amount: 1,
-                                     unit: Unit.find_by(name: 'teaspoon'))
-recipe.ingredients.find_or_create_by(food: Food.find_or_create_by(name: 'Oil'), amount: 1,
-                                     unit: Unit.find_by(name: 'tablespoon'))
+### Meatballs ###
+recipe = Recipe.create(name: 'Meatballs', description: 'A delicious dinner treat')
 
-recipe.tags << Tag.find_or_create_by(name: 'Breakfast')
-recipe.tags << Tag.find_or_create_by(name: 'Dessert')
-recipe.tags << Tag.find_or_create_by(name: 'Vegetarian')
-recipe.tags << Tag.find_or_create_by(name: 'Sweet')
-recipe.tags << Tag.find_or_create_by(name: 'Easy')
-recipe.tags << Tag.find_or_create_by(name: 'Quick')
+ingredients = [
+  { name: 'Ground beef', amount: 500, unit: 'gram' },
+  { name: 'Bread crumbs', amount: 1, unit: 'deciliter' },
+  { name: 'Milk', amount: 1, unit: 'deciliter' },
+  { name: 'Egg', amount: 1, unit: 'whole' },
+  { name: 'Salt', amount: 1, unit: 'teaspoon' },
+  { name: 'Pepper', amount: 1, unit: 'teaspoon' },
+  { name: 'Butter', amount: 1, unit: 'tablespoon' },
+  { name: 'Flour', amount: 1, unit: 'tablespoon' },
+  { name: 'Water', amount: 5, unit: 'deciliter' },
+  { name: 'Potatoes', amount: 10, unit: 'whole' },
+  { name: 'Lingonberry jam', amount: 1, unit: 'deciliter' }
+]
 
-recipe = Recipe.find_or_create_by(name: 'Meatballs', description: 'A delicious dinner treat')
-recipe.ingredients.find_or_create_by(food: Food.find_or_create_by(name: 'Ground beef'), amount: 500,
-                                     unit: Unit.find_by(name: 'gram'))
-recipe.ingredients.find_or_create_by(food: Food.find_or_create_by(name: 'Bread crumbs'), amount: 1,
-                                     unit: Unit.find_by(name: 'deciliter'))
-recipe.ingredients.find_or_create_by(food: Food.find_or_create_by(name: 'Milk'), amount: 1,
-                                     unit: Unit.find_by(name: 'deciliter'))
-recipe.ingredients.find_or_create_by(food: Food.find_or_create_by(name: 'Egg'), amount: 1,
-                                     unit: Unit.find_by(name: 'whole'))
-recipe.ingredients.find_or_create_by(food: Food.find_or_create_by(name: 'Salt'), amount: 1,
-                                     unit: Unit.find_by(name: 'teaspoon'))
-recipe.ingredients.find_or_create_by(food: Food.find_or_create_by(name: 'Pepper'), amount: 1,
-                                     unit: Unit.find_by(name: 'teaspoon'))
-recipe.ingredients.find_or_create_by(food: Food.find_or_create_by(name: 'Onion'), amount: 1,
-                                     unit: Unit.find_by(name: 'whole'))
-recipe.ingredients.find_or_create_by(food: Food.find_or_create_by(name: 'Butter'), amount: 2,
-                                     unit: Unit.find_by(name: 'tablespoon'))
-recipe.ingredients.find_or_create_by(food: Food.find_or_create_by(name: 'Potato'), amount: 6,
-                                     unit: Unit.find_by(name: 'whole'))
-recipe.ingredients.find_or_create_by(food: Food.find_or_create_by(name: 'Lingonberry jam'), amount: 1,
-                                     unit: Unit.find_by(name: 'deciliter'))
+ingredients.each do |ingredient|
+  food = Food.find_or_create_by(name: ingredient[:name])
+  amount = ingredient[:amount].to_i
+  unit = Unit.find_by(name: ingredient[:unit])
+  recipe.ingredients << Ingredient.create(food:, amount:, unit:)
+end
 
-recipe.tags << Tag.find_or_create_by(name: 'Dinner')
-recipe.tags << Tag.find_or_create_by(name: 'Meat')
-recipe.tags << Tag.find_or_create_by(name: 'Swedish')
-recipe.tags << Tag.find_or_create_by(name: 'Easy')
-recipe.tags << Tag.find_or_create_by(name: 'Quick')
+tags = %w[
+  Dinner
+  Meat
+  Swedish
+  Easy
+  Quick
+]
+
+tags.each do |tag|
+  recipe.tags << Tag.find_or_create_by(name: tag)
+end
